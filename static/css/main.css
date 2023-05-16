@@ -1,0 +1,18 @@
+.grid { margin:1em auto; border-collapse:collapse }
+.grid td {
+    width:20px; height:20px;
+    border:1px solid #ccc;
+    text-align:center;
+    font-family:sans-serif; font-size:0px
+}
+.grid td.on {
+    cursor:url('../images/eraser.png'), pointer;
+    background-color: black;
+    color:black;
+}
+
+.grid td.off {
+    cursor:url('../images/pencil_blue.png'), pointer;
+    background-color: white;
+    color: white;
+}
