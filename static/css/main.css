@@ -4,8 +4,8 @@
 }
 
 .grid td {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border: 1px solid #ccc;
     text-align: center;
     font-family: sans-serif;
@@ -24,7 +24,7 @@
     color: white;
 }
 
-.rowClues td {
+.rowHeaders td {
     width: 200px;
     height: 30px;
     border: 1px solid #ccc;
@@ -33,7 +33,7 @@
     font-size: 13px;
     background-color: white;
 }
-.colClues td {
+.colHeaders td {
     width: 30px;
     height: 200px;
     border: 1px solid #ccc;
@@ -46,11 +46,12 @@
 
 #puzzle_box {
     background-color: aquamarine;
+    height: auto;
 }
-
+/* 
 #c0r3 {
  background-color: green;
 }
-#rh1{
+#rh0{
     background-color: blue;
-}
+} */
