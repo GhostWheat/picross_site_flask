@@ -1,18 +1,53 @@
-.grid { margin:1em auto; border-collapse:collapse }
-.grid td {
-    width:20px; height:20px;
-    border:1px solid #ccc;
-    text-align:center;
-    font-family:sans-serif; font-size:0px
+.grid {
+    margin: 1em auto;
+    border-collapse: collapse
 }
+
+.grid td {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 0px
+}
+
 .grid td.on {
-    cursor:url('../images/eraser.png'), pointer;
+    cursor: url('../images/eraser.png'), pointer;
     background-color: black;
-    color:black;
+    color: black;
 }
 
 .grid td.off {
-    cursor:url('../images/pencil_blue.png'), pointer;
+    cursor: url('../images/pencil_blue.png'), pointer;
     background-color: white;
     color: white;
+}
+
+.rowClues td {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 13px;
+    background-color: white;
+}
+.colClues td {
+    width: 30px;
+    height: 200px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 13px;
+    background-color: white;
+}
+
+
+#puzzle_box {
+    background-color: aquamarine;
+}
+
+#c0r3 {
+ background-color: green;
 }
