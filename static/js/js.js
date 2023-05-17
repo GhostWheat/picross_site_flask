@@ -1,8 +1,8 @@
-let rowNum = 10;
-let colNum = 10;
+let numOfRows = 10;
+let numOfCols = 10;
 
 // var lastClicked;
-var grid = clickableGrid(rowNum, colNum, function (el, row, col, i) {
+var grid = clickableGrid(numOfRows, numOfCols, function (el, row, col, i) {
     console.log("You clicked on element:", el);
     console.log("You clicked on row:", row);
     console.log("You clicked on col:", col);
@@ -29,7 +29,7 @@ function clickableGrid(rows, cols, callback) {
             var cell = tr.appendChild(document.createElement('td'));
             cell.className = 'off';
             cell.innerHTML = 0;
-            cell.id ='c'+c+'r'+r;
+            cell.id = 'c' + c + 'r' + r;
             // cell.addEventListener('click', () => {    if (cell.innerHTML == 1) {
             //     cell.innerHTML = 0;
             //     cell.className ='off'
@@ -56,7 +56,7 @@ function createRowClues(rows) {
         var rowClue = rowClues.appendChild(document.createElement('tr'));
         var cell = rowClue.appendChild(document.createElement('td'));
         cell.innerHTML = 'Hello'
-        cell.id = 'rh'+r
+        cell.id = 'rh' + r
     }
     return rowClues;
 }
@@ -68,45 +68,93 @@ function createColClues(cols) {
     for (let c = 0; c < cols; c++) {
         var cell = colClue.appendChild(document.createElement('td'));
         cell.innerHTML = '1 1 1 1 1'
-        cell.id = 'ch'+c
+        cell.id = 'ch' + c
     }
     return colClues;
 }
 
-
-
 document.getElementById('puzzle_box').appendChild(grid);
-document.getElementById('puzzle_box').appendChild(createRowClues(rowNum));
-document.getElementById('puzzle_box').appendChild(createColClues(colNum));
+document.getElementById('puzzle_box').appendChild(createRowClues(numOfRows));
+document.getElementById('puzzle_box').appendChild(createColClues(numOfCols));
 
+function calcClues() {
+    for (let r = 0; r < numOfRows; r++) {
+        let rowString = hashRow(r);
+        document.getElementById('rh' + r).innerHTML = rowString;
+    }
 
-// function hashRow(row) {
+    for (let c = 0; c < numOfRows; c++) {
+        let colString = hashCol(c);
+        document.getElementById('ch' + c).innerHTML = colString;
+    }
+}
 
-// }
+function hashRow(row) {
+    let ongoingString = '';
+    let adder = 0;
+    for (let i = 0; i < numOfCols; i++) {
+        let thisCell = document.getElementById('c' + i + 'r' + row).innerHTML
+        if (i < (numOfCols - 1)) {
+            nextCell = document.getElementById('c' + (i + 1) + 'r' + row).innerHTML
+        } else {
+            nextCell = 0
+        }
 
-// let 
-// for (rowClues in )
+        // logic for checking contiguous blocks of ON cell
+        switch (true) {
 
+            case (thisCell == 0 && ongoingString == ''):
+                break;
 
-// function calcClues() {
-//     let r = 0
-//     while (r < rows) {
-//         let rowString = hashRow(r);
-//         rowText = document.getElementByClassName('rowClues')
+            case (thisCell == 0 && ongoingString != ''):
+                ongoingString += ' '
+                break;
 
+            case (thisCell == 1 && nextCell == 1):
+                adder += 1;
+                break;
 
-//     }
-    
+            case (thisCell == 1 && nextCell == 0):
+                adder += 1;
+                ongoingString += toString(adder);
+                adder = 0;
+                break;
+        }
+    }
+    return ongoingString
+}
 
-//     let c = 0
-//     hashCol(c);
-// }
-    
+function hashCol(col) {
+    let ongoingString = '';
+    let adder = 0;
+    for (let i = 0; i < numOfRows; i++) {
+        let thisCell = document.getElementById('c' + col + 'r' + i).innerHTML
+        if (i < (numOfRows - 1)) {
+            nextCell = document.getElementById('c' + col + 'r' + (i + 1)).innerHTML
+        } else {
+            nextCell = 0
+        }
 
-// function hashRow() {
+        // logic for checking contiguous blocks of ON cell
+        switch (true) {
 
-// }
+            case (thisCell == 0 && ongoingString == ''):
+                break;
 
-// function hashCol() {
-    
-// }
+            case (thisCell == 0 && ongoingString != ''):
+                ongoingString += '<br/>'
+                break;
+
+            case (thisCell == 1 && nextCell == 1):
+                adder += 1;
+                break;
+
+            case (thisCell == 1 && nextCell == 0):
+                adder += 1;
+                ongoingString += toString(adder);
+                adder = 0;
+                break;
+        }
+    }
+    return ongoingString
+}
