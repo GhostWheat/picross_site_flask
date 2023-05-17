@@ -24,22 +24,25 @@
     color: white;
 }
 
-.rowHeaders td {
-    width: 200px;
-    height: 30px;
+#rowHeaders td {
+    width: 20px;
+    height: 20px;
     border: 1px solid #ccc;
-    text-align: center;
+    text-align: end;
     font-family: sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     background-color: white;
+    padding-right: 3px;
 }
-.colHeaders td {
-    width: 30px;
-    height: 200px;
+
+#colHeaders td {
+    vertical-align: bottom;
+    width: 20px;
+    height: 20px;
     border: 1px solid #ccc;
-    text-align: center;
+    text-align:center;
     font-family: sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     background-color: white;
 }
 
@@ -47,7 +50,15 @@
 #puzzle_box {
     background-color: aquamarine;
     height: auto;
+    /* width: 100%; */
 }
+
+#rowHeaders {
+    position:relative;
+    top: 0%;
+    left: 0%;
+}
+
 /* 
 #c0r3 {
  background-color: green;
