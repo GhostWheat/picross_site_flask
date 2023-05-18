@@ -8,12 +8,13 @@ import {
     createRowHeadersTable,
     createColHeadersTable,
     createUpperLeftSpacer,
-    applyButtonScript,
     calcHeaders,
 } from './buildPuzzPage.js';
 
 import {
+    allPuzzles,
     gridToObj,
+    objToGrid,
 } from './storage.js';
 
 export let numOfRows = 20;
@@ -28,18 +29,37 @@ let rowClues = createRowHeadersTable(numOfRows, rowHeadersWidth)
 let grid = createNiceGrid(numOfRows, numOfCols)
 
 
-document.getElementById('BSr0c1').appendChild(spacer)
+document.getElementById('BSr0c1').appendChild(spacer);
 document.getElementById('BSr0c1').appendChild(colClues);
 
 document.getElementById('BSr1c1').appendChild(rowClues);
 document.getElementById('BSr1c1').appendChild(grid);
 
-applyButtonScript('btnPop', calcHeaders)
-// applyButtonScript('bt')
+export function applyButtonScript(btnID, funcName, key = '') {
 
-applyButtonScript('btnComp', gridToObj)
-// applyButtonScript('bt')
+    if (funcName = gridToObj) {
+    document.getElementById(btnID).addEventListener('click', funcName(key))
+    } else {
+    document.getElementById(btnID).addEventListener('click', funcName)
+    }
+};
 
-export function compareCurrentToStoredPuzz() {
-    console.log('hello')
-}
+
+document.getElementById('btnPop').addEventListener('click', calcHeaders);
+
+document.getElementById('btnSubmit').addEventListener('click', () => { objToGrid('temp1') });
+
+
+document.getElementById('btnSave').addEventListener('click', function () { gridToObj('temp1') });
+document.getElementById('btnLoad').addEventListener('click', () => { objToGrid('temp1') });
+
+
+
+export function compareCurrentToStoredPuzz(key) {
+    if (gridToObj('compare') == objToGrid(key)) {
+        alert('same!')
+    } else {
+        alert('puzzles are different!')
+    }
+
+};

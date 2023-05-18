@@ -1,5 +1,3 @@
-import { numOfRows, numOfCols } from './main.js';
-
 export function createNiceGrid(rows, cols) {
     var puzzle = document.createElement('table');
     puzzle.className = rows + 'x' + cols;
@@ -35,13 +33,8 @@ export function createNiceGrid(rows, cols) {
                 event.target.innerHTML = 1;
                 event.target.className = 'on'
             }
-
         }
-
     })
-
-
-
     return puzzle;
 }
 
@@ -89,21 +82,18 @@ export function createUpperLeftSpacer(width, height) {
     return spacerTable;
 }
 
-export function applyButtonScript(btnID, funcName) {
-    document.getElementById(btnID).addEventListener('click', funcName)
-}
-
 export function calcHeaders() {
-    let rowString = ''
-    let colString = ''
+    let rowString = '';
+    let colString = '';
+    let gridSize = document.getElementById('puzzleGrid').className;
+    let numOfRows = gridSize.split('x')[0]
+    let numOfCols = gridSize.split('x')[1]
+
     for (let r = 0; r < numOfRows; r++) {
-        // console.log('starting on row:', r)
         rowString = vectorToString(r, numOfRows, '&ensp;');
         document.getElementById('rh' + r).innerHTML = rowString;
     }
-
     for (let c = 0; c < numOfCols; c++) {
-        console.log('starting on col:', c)
         colString = vectorToString(c, numOfCols, '<br/>');
         document.getElementById('ch' + c).innerHTML = colString;
     }
@@ -112,6 +102,7 @@ export function calcHeaders() {
 export function vectorToString(vec, vectorLength, breaker) {
     let ongoingString = '';
     let adder = 0;
+// console.log(vec, vectorLength, breaker)
     // console.log('initial vector length:' + vectorLength)
     // console.log(vec)
     for (let i = 0; i < vectorLength; i++) {
@@ -146,14 +137,14 @@ export function vectorToString(vec, vectorLength, breaker) {
 
             case '1,1':
                 adder += 1;
-                console.log('a:', adder, ', o.s:', ongoingString)
+                // console.log('a:', adder, ', o.s:', ongoingString)
                 break;
 
             case '1,0':
             case '1,-1':
                 adder += 1;
                 ongoingString += adder.toString() + breaker;
-                console.log(adder)
+                // console.log(adder)
                 adder = 0;
                 break;
 
@@ -162,7 +153,7 @@ export function vectorToString(vec, vectorLength, breaker) {
         }
     }
     // ongoingString = ' ' ? '0' : ' ';
-
+    // console.log(ongoingString)
     return ongoingString == '' ? ('0' + breaker) : ongoingString
 
 }
