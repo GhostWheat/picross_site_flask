@@ -1,44 +1,36 @@
-.grid {
-    margin: 1em auto;
-    border-collapse: collapse
+
+
+#puzzle_box {
+    background-color: aquamarine;
+    height: auto;
+    width: 100%;
 }
 
-.grid td {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    text-align: center;
-    font-family: sans-serif;
-    font-size: 0px
+#bsr0c1, #bsr1c1 { 
+    /* these are the bootstrap grid columns */
+    display:flex;
 }
 
-.grid td.on {
-    cursor: url('../images/eraser.png'), pointer;
-    background-color: black;
-    color: black;
+#spacerCell {
+    
+    min-width: fit-content;
+    /* min-height: 40%; */
+    /* width: auto; */
+    height: auto;
+    /* display:table-cell; */
+    color:red;
 }
-
-.grid td.off {
-    cursor: url('../images/pencil_blue.png'), pointer;
-    background-color: white;
-    color: white;
+#colHeaders {
+    /* min-width: 40%; */
+    min-height: fit-content;
 }
-
-#rowHeaders td {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    text-align: end;
-    font-family: sans-serif;
-    font-size: 12px;
-    background-color: white;
-    padding-right: 3px;
-}
-
 #colHeaders td {
+    display:table-cell;
     vertical-align: bottom;
     width: 20px;
     height: 20px;
+    /* min-width: 20px; */
+    /* min-height: 20px; */
     border: 1px solid #ccc;
     text-align:center;
     font-family: sans-serif;
@@ -47,22 +39,66 @@
 }
 
 
-#puzzle_box {
-    background-color: aquamarine;
-    height: auto;
-    /* width: 100%; */
+#rowHeaders {
+    min-height: 40%;
+    min-width: fit-content;
+    /* min-width: 40%; */
+}
+#rowHeaders td {
+    display:table-cell;
+    width: 20px;
+    height: 20px;
+    min-width: fit-content;
+    /* min-width: min-content; */
+    border: 1px solid #ccc;
+    text-align: end;
+    font-family: sans-serif;
+    font-size: 12px;
+    background-color: white;
+    padding-right: 3px;
 }
 
-#rowHeaders {
+#puzzleGrid {
+    /* margin: 1em auto; */
+    border-collapse: collapse;
+
+}
+
+#puzzleGrid td {
+    width: 20px;
+    height: 20px;
+    min-width: auto;
+    min-height: min-content;
+
+    border: 1px solid #ccc;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 0px
+}
+
+#puzzleGrid td.on {
+    cursor: url('../images/eraser.png'), pointer;
+    background-color: black;
+    color: black;
+}
+
+#puzzleGrid td.off {
+    cursor: url('../images/pencil_blue.png'), pointer;
+    background-color: white;
+    color: white;
+}
+
+/* #rowHeaders {
     position:relative;
     top: 0%;
     left: 0%;
-}
+} */
 
-/* 
-#c0r3 {
+
+#r0c0 {
  background-color: green;
 }
 #rh0{
     background-color: blue;
-} */
+    color:blue
+}

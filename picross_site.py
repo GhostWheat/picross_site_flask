@@ -5,7 +5,8 @@ app = Flask(
     __name__,
     template_folder="./templates"
 )
-
+@app.route('/puzzle-page')
 @app.route('/', methods=['GET','POST'])
 def puzzle_page():
     return render_template('puzzle_page.html')
+

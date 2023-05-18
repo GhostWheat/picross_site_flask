@@ -1,14 +1,20 @@
 {% extends 'baseline.html' %}
 {% block content %}
-<div id="puzzle_box" class='container'>
-<div class="row" id="row1">
-
-</div>
-<div class="row" id="row2">
-
-</div>
-
-
-</div>
-<button type="submit" onclick="calcHeaders()">CALCULATE CLUES</button>
+    <div id="puzzle_box" class='container'>
+        <div class="row" id="row0">
+            {# <div class="col col-2" id="r0c0"></div> #}
+            <div class="col justify-content-center display-flex" id="BSr0c1"></div>
+            {# <div class="col col-2" id="r0c2"></div> #}
+        </div>
+        <div class="row" id="row1">
+            {# <div class="col col-2" id="r1c0"></div> #}
+            <div class="col justify-content-center" id="BSr1c1"></div>
+            {# <div class="col col-2" id="r1c2"></div> #}
+        </div>
+    </div>
+    <button type="submit"  class="btn btn-sm btn-outline-info" id="btnPop">Populate Headers</button>
+    <button type="button"  class="btn btn-sm btn-outline-success" onclick="compareCurrentToStoredPuzz()" id="btnComp">Compare to Saved</button>
+    <button type="button" class="btn btn-sm btn-outline-dark" onclick="saveUserAttempt()" id='btnSave'>SAVE</button>
+    <button type="button" class="btn btn-sm btn-outline-dark" onclick="loadUserAttempt()" id="btnLoad">LOAD</button>
+    
 {% endblock content %}
