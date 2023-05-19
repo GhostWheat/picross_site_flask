@@ -107,9 +107,18 @@ export function calcHeaders() {
 
 export function submitPuzz(gridToObj, allPuzzles, key) {
     let currentGrid = gridToObj('compare');
-    let savedObj = allPuzzles[key];
-    let rows = savedObj['rows'];
-    let cols = savedObj['columns'];
+    let savedObj = {};
+    let rows = 0;
+    let cols = 0;
+    try {
+        savedObj = allPuzzles[key];
+        rows = savedObj['rows'];
+        cols = savedObj['columns'];
+    }
+    catch {
+        return alert('No puzzle currently loaded!')
+    }
+    console.log(savedObj)
     if (currentGrid['rows'] != rows) { return alert('incorrect!') }
     if (currentGrid['columns'] != cols) { return alert('incorrect!') }
 

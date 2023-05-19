@@ -1,4 +1,4 @@
-import { calcHeaders } from './buildPuzzPage.js';
+// import { calcHeaders } from './buildPuzzPage.js';
 
 export let allPuzzles = {};
 
@@ -11,7 +11,7 @@ export function gridToObj(key) {
     // retObj['timeStamp'] = 'TIMESTAMP NEEDED'
     retObj['rows'] = grid.className.split('x')[0];
     retObj['columns'] = grid.className.split('x')[1];
-
+    retObj['descriptor']
     let list = [];
 
     for (let r = 0; r < retObj['rows']; r++) {
