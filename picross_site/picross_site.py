@@ -1,9 +1,9 @@
 # remember, capital letters used for a Class!
-from flask import Flask, Blueprint, render_template, request, redirect, url_for
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 # from car_dealership.forms import CarForm
 from models import Puzzle, db
-import js2py
+
 
 
 
@@ -12,10 +12,14 @@ import js2py
 app = Flask(__name__, template_folder="./templates")
 
 
-@app.route("/puzzle-page", methods=["GET", "POST", "PUT", "DELETE"])
+@app.route("/getpuzzle", methods=["GET"])
+@app.route("/savepuzzle", methods=["POST"])
+@app.route("/deletepuzzle", methods=["DELETE"])
 @app.route("/", methods=["GET", "POST", "PUT", "DELETE"])
 def puzzle_page():
 
+
+    
     try:
         if request.method == 'POST':
             print('error')

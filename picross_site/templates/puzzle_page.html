@@ -1,14 +1,15 @@
 {% extends 'baseline.html' %}
 {% block content %}
+{# {% include 'navigation.html' %} #}
 <div id="puzzle_box" class='container'>
     <div class="row" id="row-1">
         {# <div class="col col-2" id="r0c0"></div> #}
         <div class="col justify-content-center d-flex " id="BSr-1c1">
             <div class="button-holder p-2">
-                <button type="submit" class="btn btn-sm btn-outline-info" id="btnPop">Populate Headers</button>
+                <button method="post" type="submit" class="btn btn-sm btn-outline-info" id="btnPop">Populate Headers</button>
                 <button type="button" class="btn btn-sm btn-outline-success" id="btnSubmit">Submit Answer!</button>
-                <button type="button" class="btn btn-sm btn-outline-primary" id='btnSave'>SAVE</button>
-                <button type="button" class="btn btn-sm btn-outline-danger" id="btnLoad">LOAD</button>
+                <button type="button" class="btn btn-sm btn-outline-primary" id='btnSave'>Save</button>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btnLoad">Load</button>
             </div>
         </div>
 

@@ -36,9 +36,17 @@ export function gridToObj(key) {
 };
 
 export function objToGrid(key) {
-    let savedObj = allPuzzles[key];
-    let rows = savedObj['rows'];
-    let columns = savedObj['columns'];
+    let savedObj = {};
+    let rows = 0;
+    let cols = 0;
+    try {
+        savedObj = allPuzzles[key];
+        rows = savedObj['rows'];
+        cols = savedObj['columns'];
+    }
+    catch {
+        return alert('No puzzle currently saved!')
+    }
     let grid = document.getElementById('puzzleGrid');
 
 

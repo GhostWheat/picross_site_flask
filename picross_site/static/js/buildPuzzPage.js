@@ -92,7 +92,7 @@ export function calcHeaders() {
     let numOfRows = gridSize.split('x')[0]
     let numOfCols = gridSize.split('x')[1]
 
-    console.log('hello')
+    // console.log('hello')
 
     for (let r = 0; r < numOfRows; r++) {
         rowString = vectorToString(r, numOfRows, '&ensp;');
@@ -118,7 +118,7 @@ export function submitPuzz(gridToObj, allPuzzles, key) {
     catch {
         return alert('No puzzle currently loaded!')
     }
-    console.log(savedObj)
+    // console.log(savedObj)
     if (currentGrid['rows'] != rows) { return alert('incorrect!') }
     if (currentGrid['columns'] != cols) { return alert('incorrect!') }
 
