@@ -45,7 +45,8 @@ export function createRowHeadersTable(rows, rhWidth) {
     for (let r = 0; r < rows; r++) {
         var rowHeader = rowHeadersTable.appendChild(document.createElement('tr'));
         var cell = rowHeader.appendChild(document.createElement('td'));
-        cell.innerHTML = '1&ensp;2&ensp;3&ensp;4&ensp;11&ensp;21&ensp;1'
+        // cell.innerHTML = '1&ensp;2&ensp;3&ensp;4&ensp;11&ensp;21&ensp;1'
+        cell.innerHTML = '0&ensp;'
         cell.id = 'rh' + r
     }
     //might need to comment the below line out sometimes
@@ -60,7 +61,8 @@ export function createColHeadersTable(cols, chHeight) {
     let colHeader = colHeadersTable.appendChild(document.createElement('tr'));
     for (let c = 0; c < cols; c++) {
         let cell = colHeader.appendChild(document.createElement('td'));
-        cell.innerHTML = '1<br/>1<br/>1<br/>1<br/>1<br/>1<br/>1<br/>'
+        // cell.innerHTML = '1<br/>1<br/>1<br/>1<br/>1<br/>1<br/>1<br/>'
+        cell.innerHTML = '0'
         cell.id = 'ch' + c
     }
     //might need to comment the below line out sometimes
@@ -75,7 +77,8 @@ export function createUpperLeftSpacer(width, height) {
     spacerRow.id = 'spacerRow';
     let spacerCell = spacerRow.appendChild(document.createElement('td'));
     spacerCell.id = 'spacerCell';
-    spacerCell.innerHTML = 'I AM THE SPACER'
+    spacerCell.className = 'text-center'
+    spacerCell.innerHTML = "~PICROSS~<br/>It's puzzling!"
     spacerCell.style.width = width;
     spacerCell.style.height = height;
     spacerCell.style.backgroundColor = 'white';
@@ -89,6 +92,8 @@ export function calcHeaders() {
     let numOfRows = gridSize.split('x')[0]
     let numOfCols = gridSize.split('x')[1]
 
+    console.log('hello')
+
     for (let r = 0; r < numOfRows; r++) {
         rowString = vectorToString(r, numOfRows, '&ensp;');
         document.getElementById('rh' + r).innerHTML = rowString;
@@ -99,10 +104,30 @@ export function calcHeaders() {
     }
 }
 
+
+export function submitPuzz(gridToObj, allPuzzles, key) {
+    let currentGrid = gridToObj('compare');
+    let savedObj = allPuzzles[key];
+    let rows = savedObj['rows'];
+    let cols = savedObj['columns'];
+    if (currentGrid['rows'] != rows) { return alert('incorrect!') }
+    if (currentGrid['columns'] != cols) { return alert('incorrect!') }
+
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            if (currentGrid[r][c] != savedObj[r][c]) {
+                return alert('incorrect!')
+            }
+        }
+    }
+    return alert('Congratulations!')
+
+};
+
 export function vectorToString(vec, vectorLength, breaker) {
     let ongoingString = '';
     let adder = 0;
-// console.log(vec, vectorLength, breaker)
+    // console.log(vec, vectorLength, breaker)
     // console.log('initial vector length:' + vectorLength)
     // console.log(vec)
     for (let i = 0; i < vectorLength; i++) {
@@ -157,3 +182,4 @@ export function vectorToString(vec, vectorLength, breaker) {
     return ongoingString == '' ? ('0' + breaker) : ongoingString
 
 }
+
