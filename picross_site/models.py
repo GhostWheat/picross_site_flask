@@ -32,9 +32,9 @@ class User(db.Model, UserMixin):
     usercolor = db.Column(db.String(150), nullable = False) #, unique = True
     token = db.Column(db.String, default = '', unique = True)
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
-    # come back later and add backref car relationship
+    # come back later and add backref relationship
     puzzle = db.relationship('Puzzle', backref = 'owner', lazy = True)
-    # this means the user can exist without associated car existing/
+    # this means the user can exist without associated puzzle existing/
 
 
     def __init__(self, email, usercolor, first_color = '', last_color = '', password = ''):
