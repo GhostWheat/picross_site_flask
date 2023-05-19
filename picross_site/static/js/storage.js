@@ -50,7 +50,7 @@ export function objToGrid(key) {
     let grid = document.getElementById('puzzleGrid');
 
 
-    grid.className = rows + 'x' + columns
+    grid.className = rows + 'x' + cols
 
     for (let r = 0; r < savedObj['rows']; r++) {
         for (let c = 0; c < savedObj['columns']; c++) {

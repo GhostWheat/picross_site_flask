@@ -36,7 +36,7 @@ export function createNiceGrid(rows, cols) {
         }
     })
     return puzzle;
-}
+};
 
 export function createRowHeadersTable(rows, rhWidth) {
     var rowHeadersTable = document.createElement('table');
@@ -52,7 +52,7 @@ export function createRowHeadersTable(rows, rhWidth) {
     //might need to comment the below line out sometimes
     rowHeadersTable.style.width = rhWidth;
     return rowHeadersTable;
-}
+};
 
 export function createColHeadersTable(cols, chHeight) {
     let colHeadersTable = document.createElement('table');
@@ -68,7 +68,7 @@ export function createColHeadersTable(cols, chHeight) {
     //might need to comment the below line out sometimes
     colHeadersTable.style.height = chHeight;
     return colHeadersTable;
-}
+};
 
 export function createUpperLeftSpacer(width, height) {
     let spacerTable = document.createElement('table')
@@ -83,7 +83,19 @@ export function createUpperLeftSpacer(width, height) {
     spacerCell.style.height = height;
     spacerCell.style.backgroundColor = 'white';
     return spacerTable;
-}
+};
+
+export function clearGrid() {
+    let gridSize = document.getElementById('puzzleGrid').className;
+    let numOfRows = gridSize.split('x')[0];
+    let numOfCols = gridSize.split('x')[1];
+    for (let r = 0; r < numOfRows; ++r) {
+        for (var c = 0; c < numOfCols; ++c) {
+            document.getElementById('r' + r + 'c' + c).innerHTML = 0;
+            document.getElementById('r' + r + 'c' + c).className = 'off';
+        }
+    }
+};
 
 export function calcHeaders() {
     let rowString = '';
@@ -102,8 +114,7 @@ export function calcHeaders() {
         colString = vectorToString(c, numOfCols, '<br/>');
         document.getElementById('ch' + c).innerHTML = colString;
     }
-}
-
+};
 
 export function submitPuzz(gridToObj, allPuzzles, key) {
     let currentGrid = gridToObj('compare');
@@ -119,13 +130,13 @@ export function submitPuzz(gridToObj, allPuzzles, key) {
         return alert('No puzzle currently loaded!')
     }
     // console.log(savedObj)
-    if (currentGrid['rows'] != rows) { return alert('incorrect!') }
-    if (currentGrid['columns'] != cols) { return alert('incorrect!') }
+    if (currentGrid['rows'] != rows) { return alert('Incorrect!') }
+    if (currentGrid['columns'] != cols) { return alert('Incorrect!') }
 
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
             if (currentGrid[r][c] != savedObj[r][c]) {
-                return alert('incorrect!')
+                return alert('Incorrect!')
             }
         }
     }
@@ -190,5 +201,5 @@ export function vectorToString(vec, vectorLength, breaker) {
     // console.log(ongoingString)
     return ongoingString == '' ? ('0' + breaker) : ongoingString
 
-}
+};
 

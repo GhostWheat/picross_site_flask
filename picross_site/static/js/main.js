@@ -10,6 +10,7 @@ import {
     createUpperLeftSpacer,
     calcHeaders,
     submitPuzz,
+    clearGrid,
 } from './buildPuzzPage.js';
 
 import {
@@ -35,6 +36,10 @@ document.getElementById('BSr0c1').appendChild(colClues);
 
 document.getElementById('BSr1c1').appendChild(rowClues);
 document.getElementById('BSr1c1').appendChild(grid);
+
+
+document.getElementById('btnClear').
+    addEventListener('click', () => { clearGrid() });
 
 
 document.getElementById('btnPop').
