@@ -58,8 +58,7 @@ document.getElementById('btnSave').
 
 document.getElementById('btnLoad').
     addEventListener('click', () => { objToGrid('temp1') });
-document.getElementById('btnLoad').
-    addEventListener('click', function () { DBToObj('temp1') });
 
-    document.getElementById('btnTest').
+
+document.getElementById('btnTest').
     addEventListener('click', () => { DBToObj('temp1') });   

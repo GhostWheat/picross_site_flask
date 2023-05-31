@@ -1,7 +1,7 @@
 let token = `65f51b56f58de02d3fe86decb0db76d30861589eb6a94100` //this is elephantSQL token
 
 let APIURL = `https://marvel-inventory-flask.glitch.me/api/heroes`
-let localURL = `127.0.0.1/5003/api/puzzles`
+let localURL = `127.0.0.1:5003/api/puzzles`
 
 export const serverCalls = {
     get: async () => {
@@ -23,7 +23,7 @@ export const serverCalls = {
     },
 
     getOne: async (id) => {
-        const response = await fetch (localURL,+`/${id}`, {
+        const response = await fetch (`/api/puzzles/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/JSON',

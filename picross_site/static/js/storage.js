@@ -2,6 +2,16 @@
 
 import { serverCalls } from './server.js';
 
+function isEmpty (obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return true;
+}
+
+
 export let allPuzzles = {};
 
 export function gridToObj(key) {
@@ -40,30 +50,36 @@ export function gridToObj(key) {
 
 export function objToDB(key) {
     console.log('objToDB:', key);
-    
+
 };
 
 
 export async function DBToObj(key) {
     let p1key = '02d0c7cc-79f1-4cc3-b1bd-7e1a14025acb'
     console.log('DBToObj:', p1key, 'key:', key);
-    let puzzleData = await serverCalls.getOne(p1key);
-    console.log(puzzleData);
-    return puzzleData
+    let retObj = await serverCalls.getOne(p1key);
+    console.log(retObj);
+    return retObj
 };
 
-export function objToGrid(key) {
-    let savedObj = {};
-    let rows = 0;
-    let cols = 0;
-    try {
-        savedObj = allPuzzles[key];
-        rows = savedObj['rows'];
-        cols = savedObj['columns'];
-    }
-    catch {
-        return alert('No puzzle currently saved!')
-    }
+export function objToGrid(key, savedObj = {}) {
+    console.log('objToGrid',savedObj);
+    let { rows, cols } = 0;
+    let { author, title, description } = '';
+    
+    if (isEmpty(savedObj)) {
+        try {
+            savedObj = allPuzzles[key];
+            rows = savedObj['rows'];
+            cols = savedObj['columns'];
+        }
+        catch {
+            return alert('No puzzle currently saved!')
+        }
+    } else {
+        let obj = savedObj[puzzle_data]
+        console.log(obj)
+    };
     let grid = document.getElementById('puzzleGrid');
 
 
