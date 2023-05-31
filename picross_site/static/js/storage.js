@@ -1,5 +1,7 @@
 // import { calcHeaders } from './buildPuzzPage.js';
 
+import { serverCalls } from './server.js';
+
 export let allPuzzles = {};
 
 export function gridToObj(key) {
@@ -32,7 +34,17 @@ export function gridToObj(key) {
     } else {
         allPuzzles[key] = retObj;
     }
-    //at this point, our storage object is directly analagous to our grid
+    //at this point, our storage object is directly analagous to our grid,
+    //and we have directly edited it in storage.js
+};
+
+export function ObjToDB(key) {
+    console.log('ObjToDB:',key);
+};
+
+export async function DBToObj(key) {
+    console.log('DBToObj:', key);
+    return puzzleData = await serverCalls.getOne();
 };
 
 export function objToGrid(key) {

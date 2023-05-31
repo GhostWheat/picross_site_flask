@@ -203,3 +203,24 @@ export function vectorToString(vec, vectorLength, breaker) {
 
 };
 
+
+// The below function would be for click-drag functionality.
+export function addClickDrag() {
+    const delta = 6;
+    let startX;
+    let startY;
+
+    element.addEventListener('mousedown', function (event) {
+        startX = event.pageX;
+        startY = event.pageY;
+    });
+
+    element.addEventListener('mouseup', function (event) {
+        const diffX = Math.abs(event.pageX - startX);
+        const diffY = Math.abs(event.pageY - startY);
+
+        if (diffX < delta && diffY < delta) {
+            // Click!
+        }
+    });
+}

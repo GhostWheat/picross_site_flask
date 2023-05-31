@@ -16,8 +16,11 @@ import {
 import {
     allPuzzles,
     gridToObj,
+    objToDB,
+    DBToObj,
     objToGrid,
 } from './storage.js';
+
 
 export let numOfRows = 20;
 export let numOfCols = 20;
@@ -50,6 +53,8 @@ document.getElementById('btnSubmit').
 
 document.getElementById('btnSave').
     addEventListener('click', function () { gridToObj('temp1') });
+    addEventListener('click', function () { objToDB('temp1') });
 
 document.getElementById('btnLoad').
     addEventListener('click', () => { objToGrid('temp1') });
+    addEventListener('click', function () { DBToObj('temp1') });
