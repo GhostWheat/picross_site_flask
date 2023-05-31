@@ -22,7 +22,7 @@ export const serverCalls = {
         return await response.json()
     },
 
-    getOne: async () => {
+    getOne: async (id) => {
         const response = await fetch (localURL,+`/${id}`, {
             method: 'GET',
             headers: {

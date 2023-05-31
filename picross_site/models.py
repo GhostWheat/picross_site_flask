@@ -66,10 +66,10 @@ class Puzzle(db.Model):
     puzzle_data = db.Column(db.String(5000))
     user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable=False)
 
-    def __init__(self, descriptor, puzz_data, user_token):
+    def __init__(self, descriptor, puzzle_data, user_token):
         self.id = self.set_id()
         self.descriptor = descriptor
-        self.puzzle_data = puzz_data        
+        self.puzzle_data = puzzle_data        
         self.user_token = user_token
 
     def set_id(self):
@@ -80,7 +80,7 @@ class Puzzle(db.Model):
     
 class PuzzleSchema(ma.Schema):
     class Meta:
-        fields = ['id', 'descriptor', 'puzz_data']
+        fields = ['id', 'descriptor', 'puzzle_data']
 
 puzzle_schema = PuzzleSchema()
 allpuzzles_schema = PuzzleSchema(many = True)

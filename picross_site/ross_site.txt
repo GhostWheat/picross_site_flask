@@ -25,7 +25,7 @@ def puzzle_page():
             print('error')
             id = ""
             descriptor =''
-            puzz_data = ''
+            puzzle_data = ''
 
     except:
         raise Exception('Error: not saved to database.')

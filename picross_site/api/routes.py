@@ -16,11 +16,11 @@ def create_puzzle(our_user):
     descriptor = request.json['descriptor']
     puzzle_data = request.json['puzzle_data']
     user_token = our_user.token
-    customer_id = request.json['customer_id'] #IS THIS THE SAME THING AS USER_TOKEN??
+
 
     print(f"User Token: {our_user.token}")
 
-    puzzle = Puzzle(descriptor, puzzle_data, user_token, customer_id)
+    puzzle = Puzzle(descriptor, puzzle_data, user_token)
 
     db.session.add(puzzle)
     db.session.commit()
@@ -40,8 +40,19 @@ def get_allpuzzles(our_user):
     return jsonify(response)
 
 
-#retrieve (READ) only one puzzle
-@api.route('/puzzles', methods = ['GET'])
+# #retrieve (READ) only one puzzle
+# @api.route('/puzzles', methods = ['GET'])
+# @token_required
+# def get_puzzle(our_user, id):
+#     if id:
+#         puzzle = Puzzle.query.get(id)
+#         response = puzzle_schema.dump(puzzle)
+#         return jsonify(response)
+#     else:
+#         return jsonify({'message':'Valid ID Required'}), 401
+    
+# differently READ only one puzzle??
+@api.route('/puzzles/<id>', methods = ['GET'])
 @token_required
 def get_puzzle(our_user, id):
     if id:
@@ -60,7 +71,7 @@ def update_puzzle(our_user, id):
     puzzle.descriptor = request.json['descriptor']
     puzzle.puzzle_data = request.json['puzzle_data']
     puzzle.user_token = our_user.token
-    puzzle.customer_id = request.json['customer_id'] #IS THIS THE SAME THING AS USER_TOKEN??
+
 
     db.session.commit()
 

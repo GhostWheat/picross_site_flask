@@ -204,7 +204,7 @@ export function vectorToString(vec, vectorLength, breaker) {
 };
 
 
-// The below function would be for click-drag functionality.
+// The below function would be for click-drag functionality, NOT IMPLEMENTED
 export function addClickDrag() {
     const delta = 6;
     let startX;

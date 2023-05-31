@@ -38,13 +38,18 @@ export function gridToObj(key) {
     //and we have directly edited it in storage.js
 };
 
-export function ObjToDB(key) {
-    console.log('ObjToDB:',key);
+export function objToDB(key) {
+    console.log('objToDB:', key);
+    
 };
 
+
 export async function DBToObj(key) {
-    console.log('DBToObj:', key);
-    return puzzleData = await serverCalls.getOne();
+    let p1key = '02d0c7cc-79f1-4cc3-b1bd-7e1a14025acb'
+    console.log('DBToObj:', p1key, 'key:', key);
+    let puzzleData = await serverCalls.getOne(p1key);
+    console.log(puzzleData);
+    return puzzleData
 };
 
 export function objToGrid(key) {

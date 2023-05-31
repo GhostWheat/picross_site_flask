@@ -53,8 +53,13 @@ document.getElementById('btnSubmit').
 
 document.getElementById('btnSave').
     addEventListener('click', function () { gridToObj('temp1') });
+document.getElementById('btnSave').
     addEventListener('click', function () { objToDB('temp1') });
 
 document.getElementById('btnLoad').
     addEventListener('click', () => { objToGrid('temp1') });
+document.getElementById('btnLoad').
     addEventListener('click', function () { DBToObj('temp1') });
+
+    document.getElementById('btnTest').
+    addEventListener('click', () => { DBToObj('temp1') });   
