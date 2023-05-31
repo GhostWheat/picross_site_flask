@@ -1,12 +1,16 @@
 export function createNiceGrid(rows, cols) {
+    let draw = ''
     var puzzle = document.createElement('table');
+    puzzle.draggable = 'false';
     puzzle.className = rows + 'x' + cols;
     puzzle.id = 'puzzleGrid';
     for (var r = 0; r < rows; ++r) {
         var tr = puzzle.appendChild(document.createElement('tr'));
+        tr.draggable = 'false';
         tr.className = 'tr';
         for (var c = 0; c < cols; ++c) {
             var cell = tr.appendChild(document.createElement('td'));
+            cell.draggable = 'false';
             cell.className = 'off';
             cell.innerHTML = 0;
             cell.id = 'r' + r + 'c' + c;
@@ -17,26 +21,132 @@ export function createNiceGrid(rows, cols) {
 
         }
     }
-    puzzle.addEventListener('click', (event) => {
-        let h = event.target.innerHTML;
-        let c = event.target.className;
+    // puzzle.addEventListener('click', (event) => {
+    //     let h = event.target.innerHTML;
+    //     let c = event.target.className;
 
-        if (c == 'on' || c == 'off') {
+    //     if (c == 'on' || c == 'off') {
 
-            // event.target.innerHTML = 1 ? ((event.target.className = 'off'), event.target.className = 0)
-            //     : (event.target.className = 'on', event.target.className = 1)
+    //         // event.target.innerHTML = 1 ? ((event.target.className = 'off'), event.target.className = 0)
+    //         //     : (event.target.className = 'on', event.target.className = 1)
 
-            if (event.target.innerHTML == 1) {
+    //         if (h == 1) {
+    //             event.target.innerHTML = 0;
+    //             event.target.className = 'off'
+    //         } else {
+    //             event.target.innerHTML = 1;
+    //             event.target.className = 'on'
+    //         }
+    //     }
+    // })
+    // puzzle.addEventListener('click', (event) => {
+    //     // if (puzzle.contains(event.target)) {
+    //         console.log(event.target)
+    //     let h = event.target.innerHTML;
+    //     let c = event.target.className;
+    //         if (c == 'on' || c == 'off') {
+
+    //             // event.target.innerHTML = 1 ? ((event.target.className = 'off'), event.target.className = 0)
+    //             //     : (event.target.className = 'on', event.target.className = 1)
+    //             if (h == 1) {
+    //                 event.target.innerHTML = 0;
+    //                 event.target.className = 'off'
+    //             } else {
+    //                 event.target.innerHTML = 1;
+    //                 event.target.className = 'on'
+    //             }
+    //         }
+    //     // } else {
+    //     //     console.log(event.target)
+    //     // }
+    // })
+    puzzle.addEventListener('mousedown', event => { boxToggle(event), draw })
+    addClickDragSelect(puzzle)
+
+    return puzzle;
+};
+
+function boxToggle(event, draw = -1) {
+    // console.log(event.target)
+    let h = event.target.innerHTML;
+    let c = event.target.className;
+
+    if (c == 'on' || c == 'off') {
+        if (draw == 1) {
+            event.target.innerHTML = 1;
+            event.target.className = 'on';
+
+        } else if (draw == 0) {
+            event.target.innerHTML = 0
+            event.target.className = 'off';
+            
+        } else if (draw == -1) {
+            if (h == 1) {
                 event.target.innerHTML = 0;
                 event.target.className = 'off'
             } else {
                 event.target.innerHTML = 1;
                 event.target.className = 'on'
             }
-        }
-    })
-    return puzzle;
+        };
+    }
 };
+
+// The below function would be for click-drag toggling function
+export function addClickDragSelect(el) {
+    const delta = 6;
+    let startX;
+    let startY;
+    let isMouseDown = false;
+    let draw = 0;
+
+    el.addEventListener('mousedown', function (event) {
+        startX = event.pageX;
+        startY = event.pageY;
+        isMouseDown = true;
+        if (event.target.className == 'on') {
+            draw = 1;
+        } else {
+            draw = 0;
+        }
+
+    });
+
+    el.addEventListener('mouseover', function (event) {
+        if (isMouseDown) {
+            boxToggle(event, draw)
+        }
+
+    });
+
+    el.addEventListener('mouseup', function (event) {
+        isMouseDown = false;
+        const diffX = Math.abs(event.pageX - startX);
+        const diffY = Math.abs(event.pageY - startY);
+
+        // if (diffX > delta && diffY > delta) {
+        //     console.log(startX,startY)
+        //     console.log(diffX, diffY)
+        //     for (let x = startX;x < diffX; x++) {
+        //         for (let y = startY; y < diffY; y++){
+        //             console.log(x,y)
+        //             document.elementFromPoint(x,y).click()
+        //         }
+        //     }
+        // event.target.innerHTML = 1;
+        // event.target.innerHTML = 'on';
+        // boxToggle(event)
+    });
+    
+    el.addEventListener('dragstart', (e) => {
+        e.preventDefault()
+
+    });
+    el.addEventListener('drop', (e) => {
+        e.preventDefault()
+        
+    });
+}
 
 export function createRowHeadersTable(rows, rhWidth) {
     var rowHeadersTable = document.createElement('table');
@@ -204,23 +314,3 @@ export function vectorToString(vec, vectorLength, breaker) {
 };
 
 
-// The below function would be for click-drag functionality, NOT IMPLEMENTED
-export function addClickDrag() {
-    const delta = 6;
-    let startX;
-    let startY;
-
-    element.addEventListener('mousedown', function (event) {
-        startX = event.pageX;
-        startY = event.pageY;
-    });
-
-    element.addEventListener('mouseup', function (event) {
-        const diffX = Math.abs(event.pageX - startX);
-        const diffY = Math.abs(event.pageY - startY);
-
-        if (diffX < delta && diffY < delta) {
-            // Click!
-        }
-    });
-}

@@ -20,7 +20,8 @@ function isEmpty (obj) {
 };
 
 
-export let { allPuzzles, currPuzz } = {};
+export let allPuzzles = {};
+export let currPuzz = {};
 
 
 export function gridToObj(key) {
@@ -126,7 +127,7 @@ export function objToGrid(key, savedObj={}) {
         };
     };
 
-    
+
     let grid = document.getElementById('puzzleGrid');
 
 
