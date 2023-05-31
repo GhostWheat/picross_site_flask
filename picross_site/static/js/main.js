@@ -15,9 +15,10 @@ import {
 
 import {
     allPuzzles,
+    currPuzz,
     gridToObj,
     objToDB,
-    DBToObj,
+    DBToGrid,
     objToGrid,
 } from './storage.js';
 
@@ -61,4 +62,6 @@ document.getElementById('btnLoad').
 
 
 document.getElementById('btnTest').
-    addEventListener('click', () => { DBToObj('temp1') });   
+    addEventListener('click', () => { DBToGrid('temp1') });
+// document.getElementById('btnTest').
+//     addEventListener('click', () => { objToGrid('temp1', currPuzz) });   

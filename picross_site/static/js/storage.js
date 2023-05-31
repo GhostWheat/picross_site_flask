@@ -7,12 +7,12 @@ function isEmpty (obj) {
         if(obj.hasOwnProperty(prop))
             return false;
     }
-
     return true;
-}
+};
 
 
-export let allPuzzles = {};
+export let { allPuzzles, currPuzz } = {};
+
 
 export function gridToObj(key) {
     let grid = document.getElementById('puzzleGrid');
@@ -54,18 +54,20 @@ export function objToDB(key) {
 };
 
 
-export async function DBToObj(key) {
+export async function DBToGrid(key) {
     let p1key = '02d0c7cc-79f1-4cc3-b1bd-7e1a14025acb'
-    console.log('DBToObj:', p1key, 'key:', key);
+    let p2key = `a0c31ac6-6994-4101-aaf4-3916b02f5562`
+    // console.log('DBToObj:', p1key, 'key:', key);
     let retObj = await serverCalls.getOne(p1key);
-    console.log(retObj);
-    return retObj
+    // console.log(`return object:`,retObj);
+    objToGrid(key, retObj);
+    // return retObj
 };
 
-export function objToGrid(key, savedObj = {}) {
-    console.log('objToGrid',savedObj);
+export function objToGrid(key, savedObj={}) {
+    // console.log('objToGrid',savedObj);
     let { rows, cols } = 0;
-    let { author, title, description } = '';
+    let { author, title, summary } = '';
     
     if (isEmpty(savedObj)) {
         try {
@@ -77,16 +79,34 @@ export function objToGrid(key, savedObj = {}) {
             return alert('No puzzle currently saved!')
         }
     } else {
-        let obj = savedObj[puzzle_data]
-        console.log(obj)
+        let desc = savedObj[descriptor];
+        try {
+            author = desc[author];
+            title = desc[title];
+            summary = desc[summary];
+        } catch {
+            title = descriptor
+        }
+
+        savedObj = (eval(`(`+savedObj['puzzle_data']+`)`));
+        console.log(savedObj)
+        // console.log(savedObj.json())
+        try {
+            rows = savedObj['rows'];
+            cols = savedObj['columns'];
+            console.log(rows,cols)
+        } catch {
+            console.log(`couldn't assign rows/columns from DB obj`)
+            // console.log(savedObj)
+        };
     };
     let grid = document.getElementById('puzzleGrid');
 
 
     grid.className = rows + 'x' + cols
 
-    for (let r = 0; r < savedObj['rows']; r++) {
-        for (let c = 0; c < savedObj['columns']; c++) {
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
             //we go across a row
             let thisCoord = 'r' + r.toString() + 'c' + c.toString();
             //put value directly from array into cell
