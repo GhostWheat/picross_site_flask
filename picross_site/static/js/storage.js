@@ -2,6 +2,15 @@
 
 import { serverCalls } from './server.js';
 
+async function errorHandler(promise) {
+    try {
+        let data = await promise();
+        return [data, null];
+    } catch (error) {
+        return [null, error];
+    }
+};
+
 function isEmpty (obj) {
     for(var prop in obj) {
         if(obj.hasOwnProperty(prop))
@@ -87,8 +96,24 @@ export function objToGrid(key, savedObj={}) {
         } catch {
             title = descriptor
         }
+        
+        let outers = [
+            [`(`, `)`],
+            [`({`, `})`],
 
-        savedObj = (eval(`(`+savedObj['puzzle_data']+`)`));
+        ]
+        for (let o of outers) {
+            try {
+                savedObj = (eval(o[0] + savedObj['puzzle_data'] + o[1]));
+
+            } catch (err) {
+                console.log(`ran into error with:`, err)
+                console.log('alt method worked!')
+                // savedObj = (eval(`({`+savedObj['puzzle_data']+`})`));
+                // } catch {
+                //     alert('puzzle load error!')
+            }
+        }
         console.log(savedObj)
         // console.log(savedObj.json())
         try {
@@ -100,6 +125,8 @@ export function objToGrid(key, savedObj={}) {
             // console.log(savedObj)
         };
     };
+
+    
     let grid = document.getElementById('puzzleGrid');
 
 
