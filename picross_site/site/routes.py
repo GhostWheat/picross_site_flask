@@ -5,8 +5,6 @@ from picross_site.models import Puzzle, db
 
 site = Blueprint('site', __name__, template_folder='site_templates')
 
-
-
 @site.route('/')
 def home():
     print("ooga booga in the terminal")

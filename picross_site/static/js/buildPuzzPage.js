@@ -69,30 +69,33 @@ export function createNiceGrid(rows, cols) {
 // -1 is default, "i didn't pass in a drawtype" - fallback
 // 0 is we are drawing basic/default empty cells
 // 1 is we are drawing filled cells
-// 2 is we are marking a cell which DEFINITELY NOT filled-in
+// 2 is we are marking a cell which is DEFINITELY NOT filled-in, aka 'blocked'
 function boxToggle(event, drawType = -1) {
     let h = event.target.innerHTML;
     let c = event.target.className;
 
     window.oncontextmenu = function () {
         // console.log('rightclick detected')
-        event.target.className = 'definitelyNot'
+        // event.target.className = 'blocked'
         return false;
     }
 
-    if (c == 'on' || c == 'off'|| c == 'definitelyNot') {
-        if (event.buttons == 2) { //note this MUST be event.buttonS not button - i'm not positive why as of 6/02/2023
+    if (c == 'on' || c == 'off' || c == 'blocked') {
+        
+        //first IF will trigger when right-clicking on cells
+        if (event.buttons == 2) { //note this MUST be event.buttonS plural, not button - i'm not positive why as of 6/02/2023
+
             // console.log(event.button, 's:', event.buttons)
-            event.target.innerHTML = 0
-            event.target.className = 'definitelyNot'
+            event.target.innerHTML = 0;
+            event.target.className = 'blocked';
 
         } else if (drawType == 1) {
-            console.log(event.button)
+            // console.log(event.button)
             event.target.innerHTML = 1;
             event.target.className = 'on';
 
         } else if (drawType == 0) {
-            console.log(event.button)
+            // console.log(event.button)
             event.target.innerHTML = 0
             event.target.className = 'off';
             
@@ -100,15 +103,15 @@ function boxToggle(event, drawType = -1) {
             if (c == 'off') {
                 event.target.innerHTML = 1;
                 event.target.className = 'on'
-                console.log(event.button)
+                // console.log(event.button)
             } else if (c == 'on') {
                 event.target.innerHTML = 0;
                 event.target.className = 'off'
-                console.log(event.button)
-            } else if (c == 'definitelyNot') {
+                // console.log(event.button)
+            } else if (c == 'blocked') {
                 event.target.innerHTML = 0;
                 event.target.className = 'off'
-                console.log(event.button) 
+                // console.log(event.button) 
             }
             
         };
@@ -123,22 +126,34 @@ export function addClickDragSelect(el) {
     
     let isMouseDown = false;
     let drawType = 0;
-
+    // let puzzleGrid = document.getElementById('puzzleGrid')
     el.addEventListener('mousedown', function (event) {
+        // document.body.style.cursor = "url('../images/icons8-x-box-white.cur'), pointer"; 
 
         // startX = event.pageX;
         // startY = event.pageY;
         isMouseDown = true;
         // document.body.style.cursor = "pointer;";
-        document.body.style.cursor = "url('../images/eraser.png'),\;";
+        // document.body.style.cursor = "url('../images/eraser.png'),\;";
         // void 0;
 
         if (event.target.className == 'off') {
             drawType = 0;
+            // rowClasses = 'erasing';
+            document.getElementById('puzzleGrid').style.cursor = "url(../images/icons8-x-box-white.cur), pointer";
+
         } else if (event.target.className == 'on') {
             drawType = 1;
-        } else if (event.target.className == 'definitelyNot') {
-            drawType = 2; //this would be if user mousedowns on a cell that already contains a "definitelyNot a filled cell here" mark
+            // rowClasses = 'filling';
+            // console.log(document.getElementsByTagName('html').className)
+
+        } else if (event.target.className == 'blocked') {
+            drawType = 2; //this would be if user mousedowns on a cell that already contains a "blocked a filled cell here" mark
+            // console.log(document.main.classList)
+            // rowClasses  = 'blocking';
+            // document.getElementsByTagName('html').style.className == 'blocking';
+            console.log(window.document.className)
+            
         }
 
     });
@@ -147,7 +162,7 @@ export function addClickDragSelect(el) {
         if (isMouseDown) {
             boxToggle(event, drawType)
         }
-
+   
     });
 
     el.addEventListener('mouseup', function (event) {
