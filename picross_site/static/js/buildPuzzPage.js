@@ -75,14 +75,14 @@ function boxToggle(event, drawType = -1) {
     let c = event.target.className;
 
     window.oncontextmenu = function () {
-        console.log('rightclick detected')
+        // console.log('rightclick detected')
         event.target.className = 'definitelyNot'
         return false;
     }
 
     if (c == 'on' || c == 'off'|| c == 'definitelyNot') {
-        if (drawType == 2 && event.buttons == 2) {
-            console.log(event.button)
+        if (event.buttons == 2) { //note this MUST be event.buttonS not button - i'm not positive why as of 6/02/2023
+            // console.log(event.button, 's:', event.buttons)
             event.target.innerHTML = 0
             event.target.className = 'definitelyNot'
 
@@ -129,6 +129,9 @@ export function addClickDragSelect(el) {
         // startX = event.pageX;
         // startY = event.pageY;
         isMouseDown = true;
+        // document.body.style.cursor = "pointer;";
+        document.body.style.cursor = "url('../images/eraser.png'),\;";
+        // void 0;
 
         if (event.target.className == 'off') {
             drawType = 0;

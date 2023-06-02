@@ -1,6 +1,21 @@
 body {
     background-color: linen;
+    /* cursor: url('../images/icons8-x-box-white.cur'), pointer; */
 }
+
+body.none{
+    cursor: auto;
+}
+body.filling {
+    cursor: url('../images/icons8-pencil-tip-white.cur'), pointer;
+}
+body.erasing {
+    cursor: url('../images/icons8-pencil-eraser-white.cur'), pointer;
+}
+body.blockingOff {
+    cursor: url('../images/icons8-x-box-white.cur'), pointer;
+}
+
 
 
 #puzzle_box {
@@ -106,7 +121,7 @@ body {
 }
 
 #puzzleGrid td.on {
-    cursor: url('../images/eraser.png'), pointer;
+    /* cursor: url('../images/eraser.png'), pointer; */
     background-color: black;
     color: black;
     font-family: sans-serif;
@@ -114,7 +129,7 @@ body {
 }
 
 #puzzleGrid td.off {
-    cursor: url('../images/pencil_blue.png'), pointer;
+    /* cursor: url('../images/pencil_blue.png'), pointer; */
     background-color: white;
     color: white;
     font-family: sans-serif;
@@ -124,7 +139,7 @@ body {
 
 #puzzleGrid td.definitelyNot {
  
-    cursor: url('../images/pencil_blue.png'), pointer;
+
     /* background-image: "X"; */
     background-color: grey;
     color: black;
