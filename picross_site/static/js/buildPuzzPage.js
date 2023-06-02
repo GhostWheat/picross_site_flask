@@ -1,5 +1,5 @@
 export function createNiceGrid(rows, cols) {
-    let draw = ''
+    let drawType = ''
     var puzzle = document.createElement('table');
     puzzle.draggable = 'false';
     puzzle.className = rows + 'x' + cols;
@@ -14,8 +14,7 @@ export function createNiceGrid(rows, cols) {
             cell.className = 'off';
             cell.innerHTML = 0;
             cell.id = 'r' + r + 'c' + c;
-            let permaID = ''
-            permaID = cell.id
+            // let permaID = cell.id
             // cell.addEventListener('click', cellToggle(cell))
             // cell.onclick = () => { cellToggle(permaID) }
 
@@ -60,69 +59,97 @@ export function createNiceGrid(rows, cols) {
     //     //     console.log(event.target)
     //     // }
     // })
-    puzzle.addEventListener('mousedown', event => { boxToggle(event), draw })
+    puzzle.addEventListener('mousedown', event => { boxToggle(event), drawType })
     addClickDragSelect(puzzle)
 
     return puzzle;
 };
 
-function boxToggle(event, draw = -1) {
-    // console.log(event.target)
+// drawTypes:
+// -1 is default, "i didn't pass in a drawtype" - fallback
+// 0 is we are drawing basic/default empty cells
+// 1 is we are drawing filled cells
+// 2 is we are marking a cell which DEFINITELY NOT filled-in
+function boxToggle(event, drawType = -1) {
     let h = event.target.innerHTML;
     let c = event.target.className;
 
-    if (c == 'on' || c == 'off') {
-        if (draw == 1) {
+    window.oncontextmenu = function () {
+        console.log('rightclick detected')
+        return false;
+    }
+
+    if (c == 'on' || c == 'off'|| c == 'definitelyNot') {
+        if (drawType == 2 && event.buttons == 2) {
+            console.log(event.button)
+            event.target.innerHTML = 0
+            event.target.className = 'definitelyNot'
+
+        } else if (drawType == 1) {
+            console.log(event.button)
             event.target.innerHTML = 1;
             event.target.className = 'on';
 
-        } else if (draw == 0) {
+        } else if (drawType == 0) {
+            console.log(event.button)
             event.target.innerHTML = 0
             event.target.className = 'off';
             
-        } else if (draw == -1) {
-            if (h == 1) {
-                event.target.innerHTML = 0;
-                event.target.className = 'off'
-            } else {
+        } else if (drawType == -1) {
+            if (c == 'off') {
                 event.target.innerHTML = 1;
                 event.target.className = 'on'
+                console.log(event.button)
+            } else if (c == 'on') {
+                event.target.innerHTML = 0;
+                event.target.className = 'off'
+                console.log(event.button)
+            } else if (c == 'definitelyNot') {
+                event.target.innerHTML = 0;
+                event.target.className = 'off'
+                console.log(event.button) 
             }
+            
         };
     }
 };
 
-// The below function would be for click-drag toggling function
+// The below function adds click-drag cell-toggling function
 export function addClickDragSelect(el) {
-    const delta = 6;
-    let startX;
-    let startY;
+    // const delta = 6;
+    // let startX;
+    // let startY;
+    
     let isMouseDown = false;
-    let draw = 0;
+    let drawType = 0;
 
     el.addEventListener('mousedown', function (event) {
-        startX = event.pageX;
-        startY = event.pageY;
+
+        // startX = event.pageX;
+        // startY = event.pageY;
         isMouseDown = true;
-        if (event.target.className == 'on') {
-            draw = 1;
-        } else {
-            draw = 0;
+
+        if (event.target.className == 'off') {
+            drawType = 0;
+        } else if (event.target.className == 'on') {
+            drawType = 1;
+        } else if (event.target.className == 'definitelyNot') {
+            drawType = 2; //this would be if user mousedowns on a cell that already contains a "definitelyNot a filled cell here" mark
         }
 
     });
 
     el.addEventListener('mouseover', function (event) {
         if (isMouseDown) {
-            boxToggle(event, draw)
+            boxToggle(event, drawType)
         }
 
     });
 
     el.addEventListener('mouseup', function (event) {
         isMouseDown = false;
-        const diffX = Math.abs(event.pageX - startX);
-        const diffY = Math.abs(event.pageY - startY);
+        // const diffX = Math.abs(event.pageX - startX);
+        // const diffY = Math.abs(event.pageY - startY);
 
         // if (diffX > delta && diffY > delta) {
         //     console.log(startX,startY)
@@ -138,13 +165,13 @@ export function addClickDragSelect(el) {
         // boxToggle(event)
     });
     
+    // these two events remove the default drag/drop behaviour
     el.addEventListener('dragstart', (e) => {
         e.preventDefault()
-
     });
     el.addEventListener('drop', (e) => {
         e.preventDefault()
-        
+       
     });
 }
 
