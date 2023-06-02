@@ -76,6 +76,7 @@ function boxToggle(event, drawType = -1) {
 
     window.oncontextmenu = function () {
         console.log('rightclick detected')
+        event.target.className = 'definitelyNot'
         return false;
     }
 

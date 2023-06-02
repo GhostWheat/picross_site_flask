@@ -15,14 +15,14 @@ body {
     display: flex;
 } */
 
-#spacerTable {
+/* #spacerTable { */
     /* background-color: green; */
-}
+/* } */
 
-#spacerRow {
+/* #spacerRow { */
     /* border-top: lightgray 1px solid; */
     /* background-color: green; */
-}
+/* } */
 
 #spacerCell {
     /* border-top: lightgray 1px solid;
@@ -106,14 +106,54 @@ body {
 }
 
 #puzzleGrid td.on {
-
     cursor: url('../images/eraser.png'), pointer;
     background-color: black;
     color: black;
+    font-family: sans-serif;
+    font-size: 0px
 }
 
 #puzzleGrid td.off {
     cursor: url('../images/pencil_blue.png'), pointer;
     background-color: white;
     color: white;
+    font-family: sans-serif;
+    font-size: 0px
+}
+
+
+#puzzleGrid td.definitelyNot {
+ 
+    cursor: url('../images/pencil_blue.png'), pointer;
+    /* background-image: "X"; */
+    background-color: grey;
+    color: black;
+    font-family: sans-serif;
+    font-size: 0px;
+    overflow: hidden;
+    height: 20px;
+    /* max-height: 20px; */
+    
+}
+#puzzleGrid td.definitelyNot::after {
+    content: "\⛝";
+    height: 20px;
+    font-size: 20px;
+    background-color: white;
+    color: gray;
+    font-family: sans-serif;
+    margin: -10px -10px;
+    /* margin-top: 20px; */
+    /* padding-bottom: -10px; */
+    /* offset:unset; */
+    /* margin-left:-20px; */
+    /* margin-top: -6px; */
+    /* margin-bottom: -1px; */
+    /* text-orientation:sideways-left; */
+    /* writing-mode: vertical-rl; */
+    /* max-height: inherit; */
+    /* inline-size: min-content; */
+    /* text-orientation:upright; */
+    /* display:inline; */
+    line-height:0.8;
 }
