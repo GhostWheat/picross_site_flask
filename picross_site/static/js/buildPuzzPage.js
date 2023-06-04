@@ -72,7 +72,7 @@ export function createNiceGrid(rows, cols) {
 // 2 is we are marking a cell which is DEFINITELY NOT filled-in, aka 'blocked'
 function boxToggle(event, drawType = -1) {
     let h = event.target.innerHTML;
-    let c = event.target.className;
+    let c = event.target.classList;
 
     window.oncontextmenu = function () {
         // console.log('rightclick detected')
@@ -80,37 +80,49 @@ function boxToggle(event, drawType = -1) {
         return false;
     }
 
-    if (c == 'on' || c == 'off' || c == 'blocked') {
+    if ('on' in c || 'off' in c || 'blocked' in c) {
         
         //first IF will trigger when right-clicking on cells
         if (event.buttons == 2) { //note this MUST be event.buttonS plural, not button - i'm not positive why as of 6/02/2023
 
             // console.log(event.button, 's:', event.buttons)
             event.target.innerHTML = 0;
-            event.target.className = 'blocked';
+            event.target.classList.remove('on');
+            event.target.classList.remove('off');
+            event.target.classList.add('blocked');
 
         } else if (drawType == 1) {
             // console.log(event.button)
             event.target.innerHTML = 1;
-            event.target.className = 'on';
+            event.target.classList.remove('off');
+            event.target.classList.remove('blocked');
+            event.target.classList.add('on');
 
         } else if (drawType == 0) {
             // console.log(event.button)
             event.target.innerHTML = 0
-            event.target.className = 'off';
+            event.target.classList.remove('on');
+            event.target.classList.remove('blocked');
+            event.target.classList.add('off');
             
         } else if (drawType == -1) {
-            if (c == 'off') {
+            if ('off' in c) {
                 event.target.innerHTML = 1;
-                event.target.className = 'on'
+                event.target.classList.remove('off');
+                event.target.classList.remove('blocked');
+                event.target.classList.add('on');
                 // console.log(event.button)
-            } else if (c == 'on') {
+            } else if ('on' in c) {
                 event.target.innerHTML = 0;
-                event.target.className = 'off'
+                event.target.classList.remove('on');
+                event.target.classList.remove('blocked');
+                event.target.classList.add('off');
                 // console.log(event.button)
-            } else if (c == 'blocked') {
+            } else if ('blocked' in c) {
                 event.target.innerHTML = 0;
-                event.target.className = 'off'
+                event.target.classList.remove('on');
+                event.target.classList.remove('blocked');
+                event.target.classList.add('off');
                 // console.log(event.button) 
             }
             

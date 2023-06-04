@@ -142,8 +142,8 @@ export function objToGrid(key, savedObj={}) {
             // console.log(cell, thisCoord)
             // console.log(savedObj)
             cell.innerHTML = savedObj[r][c];
-            savedObj[r][c] == 0 ? cell.className = 'off'
-                : cell.className = 'on';
+            savedObj[r][c] == 0 ? cell.classList.add('off')
+                : cell.classList.add('on');
 
         }
     }
