@@ -11,7 +11,7 @@ export function createNiceGrid(rows, cols) {
         for (var c = 0; c < cols; ++c) {
             var cell = tr.appendChild(document.createElement('td'));
             cell.draggable = 'false';
-            cell.className = 'off';
+            cell.classList.add('off');
             cell.innerHTML = 0;
             cell.id = 'r' + r + 'c' + c;
             // let permaID = cell.id
@@ -80,7 +80,8 @@ function boxToggle(event, drawType = -1) {
         return false;
     }
 
-    if ('on' in c || 'off' in c || 'blocked' in c) {
+    console.log(c)
+    if (c.contains('on')||c.contains('off')||c.contains('blocked')) {
         
         //first IF will trigger when right-clicking on cells
         if (event.buttons == 2) { //note this MUST be event.buttonS plural, not button - i'm not positive why as of 6/02/2023
@@ -106,19 +107,19 @@ function boxToggle(event, drawType = -1) {
             event.target.classList.add('off');
             
         } else if (drawType == -1) {
-            if ('off' in c) {
+            if (c.contains('off')) {
                 event.target.innerHTML = 1;
                 event.target.classList.remove('off');
                 event.target.classList.remove('blocked');
                 event.target.classList.add('on');
                 // console.log(event.button)
-            } else if ('on' in c) {
+            } else if (c.contains('on')) {
                 event.target.innerHTML = 0;
                 event.target.classList.remove('on');
                 event.target.classList.remove('blocked');
                 event.target.classList.add('off');
                 // console.log(event.button)
-            } else if ('blocked' in c) {
+            } else if (c.contains('blocked')) {
                 event.target.innerHTML = 0;
                 event.target.classList.remove('on');
                 event.target.classList.remove('blocked');
